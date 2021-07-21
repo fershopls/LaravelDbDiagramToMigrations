@@ -1,0 +1,109 @@
+// Use me with:
+// python main.py example.txt
+
+table products {
+  id int
+  name varchar
+  price float
+  
+  is_enabled boolean
+  is_new boolean
+  
+  category_id int
+  collection_id int
+  brand_id int
+  
+  deleted_at timestamp
+  updated_at timestamp
+  created_at timestamp
+}
+
+
+table product_descriptions {
+  id int
+  name varchar
+  text text
+  product_id int
+}
+
+
+table discounts {
+  id int
+  discount float
+  start datetime
+  end datetime
+  
+  product_id int
+}
+
+table categories {
+  id int
+  name varchar
+  parent_id int
+}
+
+
+table collections {
+  id int
+  name varchar
+}
+
+
+table brands {
+  id int
+  name varchar
+}
+
+
+table sizes {
+  id int
+  name varchar
+  size int
+  product_id int
+}
+
+
+table colors {
+  id int
+  name varchar
+  hex varchar
+  product_id int
+}
+
+
+table stores {
+  id int
+  name varchar
+}
+
+
+table cart_items {
+  id int
+  session_id int
+  product_id int
+  color_id int
+  size_id int
+  qty int
+}
+
+
+
+Ref: "products"."id" < "product_descriptions"."product_id"
+
+Ref: "products"."id" < "discounts"."product_id"
+
+Ref: "products"."id" < "sizes"."product_id"
+
+Ref: "products"."id" < "colors"."product_id"
+
+Ref: "brands"."id" < "products"."brand_id"
+
+Ref: "collections"."id" < "products"."collection_id"
+
+Ref: "categories"."id" < "products"."category_id"
+
+Ref: "products"."id" < "cart_items"."product_id"
+
+Ref: "colors"."id" < "cart_items"."color_id"
+
+Ref: "sizes"."id" < "cart_items"."size_id"
